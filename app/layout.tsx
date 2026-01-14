@@ -1,5 +1,7 @@
+import Headercomponent from "@/components/home/header";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -25,9 +27,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} flex flex-col min-h-screen w-full`}
       >
-        {children}
+        <Headercomponent />
+        <main className="flex-1 flex">
+          {children}
+        </main>
+        <footer className="text-center bg-gray-200 py-2">Footer</footer>
+        <Toaster position="top-center" richColors />
       </body>
     </html>
   );
