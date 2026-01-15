@@ -42,3 +42,48 @@ export const createProductAction = async (data: TProductSchema, image: string): 
 
 
 }
+
+
+interface IGetProductsAction {
+    success: boolean;
+    message: string;
+    result: TProductSchema[];
+    meta: {
+        total: number;
+    };
+}
+
+export const getProductsAction = async (): Promise<IGetProductsAction> => {
+    try {
+        const products = await prisma.product.findMany()
+        return {
+            success: true,
+            message: "Products fetched successfully",
+            result: products,
+            meta: {
+                total: products.length
+            }
+        }
+    } catch (error) {
+        console.log("Product fetching error:", error)
+        if (error instanceof APIError) {
+            return {
+                success: false,
+                message: error?.message || "Product fetching failed",
+                result: [],
+                meta: {
+                    total: 0
+                }
+            }
+        }
+    }
+
+    return {
+        success: false,
+        message: "UnKnown error occurred while fetching products",
+        result: [],
+        meta: {
+            total: 0
+        }
+    }
+}
