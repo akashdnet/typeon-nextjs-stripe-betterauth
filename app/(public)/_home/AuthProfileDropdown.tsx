@@ -11,23 +11,13 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LayoutDashboard, LogOut, User } from "lucide-react";
+import { listItems } from "@/utils/constant";
+import { LogOut } from "lucide-react";
 import Link from "next/link";
 
 
 
-const listItems = [
-    {
-        icon: User,
-        property: 'Profile',
-        href: '#/profile'
-    },
-    {
-        icon: LayoutDashboard,
-        property: 'Dashboard',
-        href: '#/dashboard'
-    }
-]
+
 
 
 

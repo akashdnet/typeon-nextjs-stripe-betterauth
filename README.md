@@ -1,4 +1,4 @@
 
 
-# Typeon - Ecommerce Solution with authentication and payment gateway
+# TypeOn - Ecommerce Solution with authentication and payment gateway
 
