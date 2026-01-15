@@ -1,7 +1,7 @@
 "use server"
 
 import { auth } from "@/lib/auth";
-import { APIError } from "better-auth";
+import { APIError } from "better-auth/api";
 import { headers } from "next/headers";
 import { TLoginSchema } from "../(public)/(auth)/login/zod";
 import { TRegisterSchema } from "../(public)/(auth)/register/zod";

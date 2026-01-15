@@ -14,7 +14,7 @@ import { toast } from "sonner";
 import { TLoginSchema, loginSchema } from "./zod";
 
 
-export default function App() {
+export default function LoginHomePage() {
 
     const route = useRouter();
 

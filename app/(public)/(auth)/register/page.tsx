@@ -13,7 +13,7 @@ import { toast } from "sonner";
 import { RegisterSchema, TRegisterSchema } from "./zod";
 
 
-export default function App() {
+export default function RegisterHomePage() {
 
     const route = useRouter();
 
