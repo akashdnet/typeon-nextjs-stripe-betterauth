@@ -1,8 +1,8 @@
-import { signOutAction } from "@/app/actions/auth"
 import { Button } from "@/components/ui/button"
 import { auth } from "@/lib/auth"
 import { headers } from "next/headers"
 import Link from "next/link"
+import AuthProfileDropdown from "./AuthProfileDropdown"
 
 
 
@@ -20,10 +20,10 @@ export async function AuthButtons() {
     }
 
     return (
-        <div className="flex gap-2">
-            <Button><Link href="/dashboard">Dashboard</Link></Button>
-            <Button variant="destructive" onClick={signOutAction}>Log Out</Button>
-
-        </div>
+        <AuthProfileDropdown
+            name={session.user.name}
+            email={session.user.email}
+            image={session.user.image || ""}
+        />
     )
 }
