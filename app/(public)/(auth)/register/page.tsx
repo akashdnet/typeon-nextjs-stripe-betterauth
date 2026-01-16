@@ -1,7 +1,7 @@
 "use client"
 
 import { signUpAction } from "@/app/actions/auth";
-import InputComponent from "@/components/form/InputComponent copy";
+import InputComponent from "@/components/form/InputComponent";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,7 +13,7 @@ import { toast } from "sonner";
 import { RegisterSchema, TRegisterSchema } from "./zod";
 
 
-export default function App() {
+export default function RegisterHomePage() {
 
     const route = useRouter();
 
