@@ -1,7 +1,7 @@
 "use client"
 
 import { signInAction } from "@/app/actions/auth";
-import InputComponent from "@/components/form/InputComponent copy";
+import InputComponent from "@/components/form/InputComponent";
 import PasswordComponent from "@/components/form/PasswordComponent";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";

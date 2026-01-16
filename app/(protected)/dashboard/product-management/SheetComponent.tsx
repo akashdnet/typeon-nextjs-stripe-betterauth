@@ -1,6 +1,5 @@
 "use client"
 
-import { createProductAction } from "@/app/actions/product"
 import { Button } from "@/components/ui/button"
 import {
     Sheet,
@@ -12,46 +11,61 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet"
-import { useState } from "react"
-import { toast } from "sonner"
+import { type LucideIcon } from "lucide-react"
 import FormComponent from "./FormComponent"
 import { TProductSchema } from "./zod"
 
-export function SheetComponent() {
+interface SheetComponentProps {
+    title: string;
+    description?: string;
+    icon?: LucideIcon;
+    data?: Partial<TProductSchema>;
+    onSubmit: (data: TProductSchema) => void;
+    open: boolean;
+    setOpen: (open: boolean) => void;
+    trigger?: React.ReactNode;
+}
 
-    const [open, setOpen] = useState(false)
-    const image = "https://cdn-icons-png.flaticon.com/512/5987/5987424.png"
-
-
-    const onSubmit = async (data: TProductSchema) => {
-        const tId = toast.loading("Creating product...");
-        const response = await createProductAction(data, image);
-        if (response.success) {
-            toast.success(response.message || "Product created successfully", { id: tId });
-            setOpen(false);
-        } else {
-            toast.error(response.message || "Product creation failed", { id: tId });
-        }
-    }
+export function SheetComponent({
+    title,
+    description,
+    icon: IconX,
+    data,
+    onSubmit,
+    open,
+    setOpen,
+    trigger
+}: SheetComponentProps) {
     return (
         <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
-                <Button variant="outline">Create Product</Button>
+                {trigger ? trigger : (
+                    IconX ? (
+                        <Button variant="ghost" size="icon" className="rounded-full">
+                            <IconX size={18} />
+                        </Button>
+                    ) : (
+                        <Button variant="outline">{title}</Button>
+                    )
+                )}
             </SheetTrigger>
-            <SheetContent>
-                <SheetHeader className="text-center shadow-2xl">
-                    <SheetTitle className="text-lg font-semibold">Create Product</SheetTitle>
+            <SheetContent className="sm:max-w-md">
+                <SheetHeader className="mb-6">
+                    <SheetTitle className="text-2xl font-bold">{title}</SheetTitle>
                     <SheetDescription>
-                        Create a new product here. Click save when you&apos;re done.
+                        {description || "Fill in the details below. Click save to apply changes."}
                     </SheetDescription>
                 </SheetHeader>
-                <div className="flex-1 overflow-y-auto py-4 space-y-2 ">
-                    <FormComponent onSubmit={onSubmit} />
+                <div className="flex-1 overflow-y-auto py-2">
+                    <FormComponent onSubmit={onSubmit} data={data} key={open ? 'open' : 'closed'} />
                 </div>
-                <SheetFooter>
-                    <Button type="submit" form="product-form">Save Product</Button>
+                <SheetFooter className="mt-6 flex gap-2">
+
+                    <Button type="submit" form="product-form" className="flex-1">
+                        Save Product
+                    </Button>
                     <SheetClose asChild>
-                        <Button variant="outline">Close</Button>
+                        <Button variant="outline" className="flex-1">Cancel</Button>
                     </SheetClose>
                 </SheetFooter>
             </SheetContent>
